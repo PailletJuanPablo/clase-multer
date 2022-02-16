@@ -32,12 +32,13 @@ const controller = {
 	},
 
 	// Create -  Method to store
-	store: (req, res) => {
+	store: function (req, res) {
 		// req.file es una nueva clave que multer le agrega al objeto req 
 		// con todos los datos resultantes de procesar el archivo
 
 		// Pushear al array de productos existente un nuevo producto
 		// Un nuevo objeto literal
+
 
 		// Convertir price a número
 		// Agregarle ID e Image
@@ -51,15 +52,14 @@ const controller = {
 			productToCreate.discount = Number(productToCreate.discount);
 		}
 
-
-		productToCreate.id = this.asignarIdAProducto(productToCreate);
+		productToCreate.id = controller.asignarIdAProductoEnBaseAlUltimo();
 
 		// Agregar un elemento a un array 
 		// Método Push
 		// Array.push(nuevoElemento)
 		products.push(productToCreate);
 
-		this.guardarProductos()
+		controller.guardarProductos()
 		// Guardar el archivo json con el nuevo array
 
 
@@ -76,10 +76,30 @@ const controller = {
 
 	// Update - Form to edit
 	edit: (req, res) => {
-		// Do the magic
+		// Encontrar un producto en base a su id
+		// Pasarle a la vista los datos de este producto
+		// Buscar en array de products
+		// El elemento cuyo id sea el enviado por parámetros
+		// find()
+		// Accedo al id en req.params.id
+		const idProducto = req.params.id;
+		const productToEdit = products.find((product) => product.id == idProducto);
+		if (!productToEdit) {
+			return res.send('ERROR NO EXISTE PRODUCTO')
+		}
+
+		return res.render('product-edit-form', { productToEdit })
 	},
 	// Update - Method to update
 	update: (req, res) => {
+		// Voy a tener que buscar el indice en el array del producto en base a su id
+		const idProducto = req.params.id;
+		const indiceDelProducto = products.findIndex((product) => product.id == idProducto);
+
+		products[indiceDelProducto] = { ...products[indiceDelProducto], ...req.body }
+		controller.guardarProductos()
+
+		return res.send(products)
 		// Do the magic
 	},
 
@@ -90,8 +110,8 @@ const controller = {
 	guardarProductos() {
 		fs.writeFileSync(productsFilePath, JSON.stringify(products, null, 2))
 	},
-	asignarIdAProducto(productToCreate) {
-		return products.length + 1;
+	asignarIdAProductoEnBaseAlUltimo: function () {
+		return products[products.length - 1].id + 1;
 	}
 };
 

@@ -100,10 +100,10 @@
   },
   {
     "id": 12,
-    "name": "Home Theatre Sony Bdv-e4100",
-    "description": "El sonido Surround de 5.1 canales y 1000 W proporciona un audio de verdadero impacto en los efectos especiales de películas y efectos de sonido de música y deportes. Con la tecnología Near Field Communication(NFC) podés disfrutar de Sonido One- Touch para reproducir música de forma instantánea",
-    "price": 32990,
-    "discount": 0,
+    "name": "Este es un nuevo nombre",
+    "description": "Esta descripción es desde edición",
+    "price": "12",
+    "discount": "15",
     "image": "img-home-theater-sony.jpg",
     "category": "visited"
   },
@@ -160,5 +160,23 @@
     "description": "test",
     "image": "image-1644884243492.jpeg",
     "id": 18
+  },
+  {
+    "name": "Producto de prueba nuevo",
+    "price": 123,
+    "discount": 12,
+    "category": "in-sale",
+    "description": "Descripción de prueba",
+    "image": "image-1645051156577.jpeg",
+    "id": 19
+  },
+  {
+    "name": "Producto de prueba nuevo",
+    "price": 123,
+    "discount": 12,
+    "category": "in-sale",
+    "description": "Descripción de prueba",
+    "image": "image-1645051243574.jpeg",
+    "id": 20
   }
 ]
